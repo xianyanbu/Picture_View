@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片查看</title>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+</head>
+<body>
+<div class="container">
+    <div class="pic">
+        <img src="images/1.jpg"  style="float: left">
+        <img src="images/2.jpg" style="float: left" >
+        <img src="images/3.jpg" style="float: left">
+        <img src="images/4.jpg" style="float: left">
+        <img src="images/5.jpg" style="float: left">
+        <img src="images/6.jpg" style="float: left">
+        <img src="images/7.jpg" style="float: left">
+        <img src="images/9.jpg" style="float: left">
+        <img src="images/10.jpg" style="float: left">
+        <img src="images/11.jpg" style="float: left">
+        <img src="images/12.jpg" style="float: left">
+        <img src="images/13.jpg" style="float: left">
+        <img src="images/14.jpg" style="float: left">
+        <img src="images/15.jpg" style="float: left">
+        <img src="images/16.jpg" style="float: left">
+    </div>
+    <div class="shadow_area">
+        <div class="move_bar"></div>
+        <div class="button"></div>
+    </div>
+</div>
+<script type="text/javascript"  src="js/jquery.js"></script>
+
+<script>
+    var m=$(".move_bar").offset().left;
+    $(".button").mousedown(function()
+    {
+        var isMove=true;      //如果鼠标点击，isMove赋值为真，否则为假
+        $(document).mousemove(function(event)
+        {
+            if(isMove)
+            {
+                if(event.pageX<m+24)    //24是button长度的一半
+                    event.pageX=m+24;
+                if(event.pageX>m+943)
+                    event.pageX=m+943;     //move_bar的宽度是967，减去button背景图片宽度的一半得到943
+                $(".button").css("left",event.pageX-m-24+200);
+                $(".pic").css("left",-(event.pageX-m-24)*(24800/976));  //鼠标移动的距离乘以（页面的总宽度/鼠标滑动条的宽度）
+                                                                           // 刚好可以鼠标滑动到整个页面
+            }
+        }).mouseup(function()
+        {
+            isMove=false;
+        });
+    })
+</script>
+</body>
+</html>
